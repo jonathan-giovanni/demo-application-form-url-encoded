@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: demo-microservice-application-form-url-encoded
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://${DB_HOST:localhost:5432}/${DB_NAME:test} #base de datos
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+  #    hikari:
+  #      maximumPoolSize: ${MAX_POOL_CONNECTIONS:3} #maximo de 3 conexiones
+  jpa:
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect #plataforma de la conexion
+
+
+#configuracion del servidor
+server:
+  port: ${PORT:9080}
+#  servlet:
+#    context-path: /test
+
+#informacion del servicio
+info:
+  component: Microservicio de prueba del tipo de datos application form url encoded
+  version: 1.0
+
+#application
+application:
+  id: ${spring.application.name}
+  version: ${info.version}
+  env: development
+  log-probe: true
+  #Log spring
+  level:
+    ROOT: DEBUG
+    org.springframework: INFO
+    org.springframework.data: INFO
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+
+#configuracion de exposicion de servicio REST
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+
+
